@@ -1,0 +1,203 @@
+@layout('layouts.master')
+
+@section('title')
+    Data Pengguna | E-Surat Polsek
+@endsection
+
+@section('sidebar')
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{ assetsUrl('assets/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{ auth.user.nama }}</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="/index" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-envelope"></i>
+              <p>
+                Surat Masuk
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/inmails" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Surat Masuk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dispositions" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Disposisi Surat Masuk</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="/outmails" class="nav-link">
+              <i class="nav-icon fas fa-share"></i>
+              <p>Surat Keluar</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Laporan
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/inmail-reports" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Surat Masuk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/outmail-reports" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Surat Keluar</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="/users" class="nav-link active">
+              <i class="nav-icon fas fa-users"></i>
+              <p>Data Pengguna</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/logout" class="nav-link">
+              <i class="nav-icon far fa-circle text-danger"></i>
+              <p>Keluar</p>
+            </a>
+          </li>
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+@endsection
+
+@section('content')
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-10">
+              <div class="card mt-2">
+                <div class="card-header">
+                  <h3>Ubah Data Pengguna</h3>
+                </div>
+                <!-- /.card-header -->
+                
+                <div class="card-body">
+                    <form action="{{ route('user.update', { id: user.id }) }}" method="POST">
+                      {{ csrfField() }}
+                      <div class="form-group">
+                        <label for="jabatan">Role</label>
+                        <select class="form-control" name="role" value="{{ user.role }}">
+                          <option value="Admin">Admin</option>
+                          <option value="KAPOLSEK">KAPOLSEK</option>
+                          <option value="Satuan Kerja">Satuan Kerja</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ user.nama }}" placeholder="Nama lengkap Anda">
+                      </div>
+                      <div class="form-group">
+                        <label for="nrp">NRP (Nomor Register Pokok)</label>
+                        <input type="text" class="form-control" id="nrp" name="nrp" value="{{ user.nrp }}" placeholder="NRP Anda">
+                      </div>
+                      <div class="form-group">
+                        <label for="jabatan">Satuan</label>
+                        <select class="form-control" name="satuan" value="{{ user.satuan }}">
+                          <option value="SIUM">SIUM</option>
+                          <option value="RESKRIM">RESKRIM</option>
+                          <option value="BABHINKAMTIBMAS">BABHINKAMTIBMAS</option>
+                          <option value="SPKT">SPKT</option>
+                          <option value="SABHARA">SABHARA</option>
+                          <option value="INTELKAM">INTELKAM</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="jabatan">Pangkat</label>
+                        <select class="form-control" name="pangkat" value="{{ user.pangkat }}">
+                          <option value="KOMPOL">KOMPOL</option>
+                          <option value="AKP">AKP</option>
+                          <option value="IPTU">IPTU</option>
+                          <option value="IPDA">IPDA</option>
+                          <option value="AIPTU">AIPTU</option>
+                          <option value="AIPDA">AIPDA</option>
+                          <option value="BRIPKA">BRIPKA</option>
+                          <option value="BRIGPOL">BRIGPOL</option>
+                          <option value="BRIGTU">BRIGTU</option>
+                          <option value="BRIGDA">BRIGDA</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="jenisKelamin">Jenis Kelamin</label>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="jenisKelamin" value="Laki-laki" checked>
+                          <label class="form-check-label" for="Laki-laki">Laki-laki</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="jenisKelamin" value="Perempuan">
+                          <label class="form-check-label" for="Perempuan">Perempuan</label>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <textarea class="form-control" rows="3" name="alamat" placeholder="Alamat Anda">{{ user.alamat }}</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="jabatan">Status</label>
+                        <select class="form-control" name="status" value="{{ user.status }}">
+                          <option value="Aktif">Aktif</option>
+                          <option value="Tidak aktif">Tidak aktif</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" placeholder="Username Anda">
+                      </div>
+                      <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" value="{{ user.password }}" placeholder="Password Anda">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+@endsection

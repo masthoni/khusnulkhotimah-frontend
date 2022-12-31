@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <title>Cetak Surat Keluar | E-Surat Polsek</title>
+    </head>
+    <body>
+        
+        <table border="0">
+            <tr>
+                <td colspan="4" style="text-align:center"><img src="{{ assetsUrl('assets/img/polri-grayscale.png') }}" width="53" height="45px"></td>
+                <td>&nbsp;</td><td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align:center">POLRI DAERAH JAWA TIMUR</td>
+                <td>&nbsp;</td><td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align:center">RESORT LAMONGAN</td>
+                <td>&nbsp;</td><td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align:center">SEKTOR SUKODADI</td>
+                <td>&nbsp;</td><td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align:center"><u>Jalan P. Sudirman 38, Sukodadi Lamongan 62253</u></td>
+                <td>&nbsp;</td>
+                <td><div style="margin-left: 80px">Lamongan, {{ outmail.tgl }}</div></td>
+            </tr>
+        </table>
+        
+        <table>
+            <tr>
+                <td width="18%">Nomor</td>
+                <td>:</td>
+                <td>{{ outmail.no_surat }}</td><td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Klasifikasi</td>
+                <td>:</td>
+                <td>{{ outmail.klasifikasi_surat.toUpperCase() }}</td><td>&nbsp;</td>
+            </tr>
+            <tr><td colspan="3"></td><br></tr>
+            <tr>
+                <td>Lampiran</td>
+                <td>:</td>
+                <td>
+                    @if(outmail.lampiran == '-')
+                        -
+                    @elseif(outmail.lampiran == 'null')
+                        -
+                    @else
+                        1 lembar
+                    @endif
+                </td><td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Perihal</td>
+                <td>:</td>
+                <td>{{ outmail.perihal }}</td>
+                <td><div style="margin-left: 250px">Kepada</div></td>
+            </tr>
+        </table><br/>
+        <div style="margin-left: 410px">Yth. {{ outmail.kepada.toUpperCase() }}</div><br/>
+        <div style="margin-left: 410px">di</div><br/>
+        <div style="margin-left: 410px"><u>Lamongan</u></div><br/>
+        
+        {{{ outmail.isi }}}<br/><br/><br/>
+
+        <table>
+            <tr>
+                <td width="43%"></td>
+                <td width="45%">
+                    KEPALA KEPOLISIAN SEKTOR SUKODADI
+                </td>
+            </tr>
+        </table><br/><br/><br/><br/>
+        <table>
+            <tr>
+                <td width="55%"></td>
+                <td width="50%" style="text-align:center">
+                    <u>M LAZIB, SH.</u>
+                </td>
+            </tr>
+            <tr>
+                <td width="55%"></td>
+                <td width="50%" style="text-align:center">
+                    INSPEKTUR POLISI SATU NRP 67080030
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

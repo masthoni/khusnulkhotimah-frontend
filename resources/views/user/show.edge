@@ -1,0 +1,194 @@
+@layout('layouts.master')
+
+@section('title')
+    Data Pengguna | E-Surat Polsek
+@endsection
+
+@section('sidebar')
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{ assetsUrl('assets/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{ auth.user.nama }}</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="/index" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-envelope"></i>
+              <p>
+                Surat Masuk
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/inmails" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Surat Masuk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dispositions" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Disposisi Surat Masuk</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="/outmails" class="nav-link">
+              <i class="nav-icon fas fa-share"></i>
+              <p>Surat Keluar</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Laporan
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/inmail-reports" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Surat Masuk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/outmail-reports" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Surat Keluar</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="/users" class="nav-link active">
+              <i class="nav-icon fas fa-users"></i>
+              <p>Data Pengguna</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/logout" class="nav-link">
+              <i class="nav-icon far fa-circle text-danger"></i>
+              <p>Keluar</p>
+            </a>
+          </li>
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+@endsection
+
+@section('content')
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-10">
+              <div class="card mt-2">
+                <div class="card-header">
+                  <h3>Detail Data Pengguna</h3>
+                </div>
+                <!-- /.card-header -->
+                
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="jabatan">Role</label>
+                        <p>{{ user.role }}</p>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <p>{{ user.nama }}</p>
+                      </div>    
+                    </div>
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="nrp">NRP (Nomor Register Pokok)</label>
+                        <p>{{ user.nrp }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="jabatan">Satuan</label>
+                        <p>{{ user.satuan }}</p>
+                      </div>    
+                    </div>
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="jabatan">Pangkat</label>
+                        <p>{{ user.pangkat }}</p>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="jenisKelamin">Jenis Kelamin</label>
+                        <p>{{ user.jenis_kelamin }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="alamat">Alamat</label>
+                    <p>{{ user.alamat }}</p>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="jabatan">Status</label>
+                        <p>{{ user.status }}</p>
+                      </div>    
+                    </div>
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="username">Username</label>
+                        <p>{{ user.username }}</p>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="password">Password</label>
+                        <p>{{ user.password }}</p>
+                      </div>  
+                    </div>
+                  </div>
+                  <a href="{{ route('user.index') }}" class="btn btn-block btn-secondary">
+                    <i class="fas fa-arrow-circle-left"></i> Kembali
+                  </a>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+@endsection

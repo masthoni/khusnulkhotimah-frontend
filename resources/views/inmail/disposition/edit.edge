@@ -1,0 +1,178 @@
+@layout('layouts.master')
+
+@section('title')
+    Disposisi Surat Masuk | E-Surat Polsek
+@endsection
+
+@section('sidebar')
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{ assetsUrl('assets/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{ auth.user.nama }}</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="/index" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-envelope"></i>
+              <p>
+                Surat Masuk
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/inmails" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Surat Masuk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dispositions" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Disposisi Surat Masuk</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="/outmails" class="nav-link">
+              <i class="nav-icon fas fa-share"></i>
+              <p>Surat Keluar</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Laporan
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/inmail-reports" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Surat Masuk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/outmail-reports" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Surat Keluar</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="/users" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>Data Pengguna</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/logout" class="nav-link">
+              <i class="nav-icon far fa-circle text-danger"></i>
+              <p>Keluar</p>
+            </a>
+          </li>
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+@endsection
+
+@section('content')
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-10">
+              <div class="card mt-2">
+                <div class="card-header">
+                  <h3>Ubah Surat Masuk</h3>
+                </div>
+                <!-- /.card-header -->
+                
+                <div class="card-body">
+                  <h5 class="text-center">
+                    POLRI DAERAH JAWA TIMUR<br>
+                    RESOR LAMONGAN SEKTOR SUKODADI
+                  </h5><hr>
+                  <p class="text-center">
+                    <b><u>LEMBAR DISPOSISI</u></b>
+                  </p>
+                  
+                  <form action="{{ route('disposition.update', { id: disposition.id }) }}" method="POST">
+                    {{ csrfField() }}
+                    <div class="form-group">
+                      <label for="kepada">Kepada</label>
+                      <input type="text" class="form-control" name="kepada" id="kepada" value="Kapolsek Sukodadi">
+                    </div>
+                    <div class="form-group">
+                      <label for="noAgenda">Nomor Agenda</label>
+                      <input type="text" class="form-control" name="noAgenda" id="noAgenda" value="{{ disposition.no_agenda }}" placeholder="Nomor agenda surat">
+                    </div>
+                    <div class="form-group">
+                      <label for="pengirim">Pengirim</label>
+                      <input type="text" class="form-control" name="pengirim" id="pengirim" value="{{ disposition.pengirim }}" placeholder="Pengirim surat">
+                    </div>
+                    <div class="form-group">
+                      <label for="noSurat">Nomor Surat</label>
+                      <input type="text" class="form-control" name="noSurat" id="noSurat" value="{{ disposition.no_surat }}" placeholder="Nomor surat">
+                    </div>
+                    <div class="form-group">
+                      <label for="tglSurat">Tanggal Surat</label>
+                      <input type="date" class="form-control" name="tglSurat" id="tglSurat" value="{{ disposition.tgl_surat }}">
+                    </div>
+                    <div class="form-group">
+                      <label for="perihal">Perihal</label>
+                      <input type="text" class="form-control" name="perihal" id="perihal" value="{{ disposition.perihal }}" placeholder="Perihal surat">
+                    </div>
+                    <div class="form-group">
+                      <label for="tglDiterima">Tanggal Diterima</label>
+                      <input type="date" class="form-control" name="tglDiterima" value="{{ disposition.tgl_diterima }}">
+                    </div>
+                    <div class="form-group">
+                      <label for="waktuDiterima">Waktu Diterima</label>
+                      <input type="time" class="form-control" name="waktuDiterima" id="waktuDiterima" value="{{ disposition.waktu_diterima }}">
+                    </div>
+                    <div class="form-group">
+                      <label for="jabatan">Status</label>
+                      <select class="form-control" name="status" value="{{ disposition.status }}">
+                        <option value="Menunggu Konfirmasi">Menunggu Konfirmasi</option>
+                        <option value="Selesai">Selesai</option>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                  </form>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+@endsection
